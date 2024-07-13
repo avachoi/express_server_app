@@ -1,17 +1,19 @@
 doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-    body 
-        nav 
-        ul 
-        li: a(href="/") Home
-        li: a(href="/login") Login
-        h1=title 
-        p!= content
+html
+  head
+    title Post List
+  body
+    h1 #{user}'s posts
+    ul
+      each post in posts
+        li 
+            p title: #{post.title}
+            p content: #{post.content}
 
-        img(src="/images/food.jpg", alt="Your Image")
-        form(action="/download", method="get")
-            button(type="submit") Download Image
+    h2 Add New post
+    form(action="/add-post" method="POST")
+      label(for="title") Title:
+      input(type="text" name="title" id="title" required)
+      label(for="content") Content:
+      input(type="textarea" name="content" id="content" required)
+      button(type="submit") Add Post

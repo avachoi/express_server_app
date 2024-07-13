@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const morgan = require("morgan");
 
+const usersData = require("./data/users.js");
+const postsData = require("./data/posts.js");
+
 const app = express();
 const port = 8080;
 
@@ -38,9 +41,32 @@ app.use(
 		].join(" ");
 	})
 );
-app.get("/",(req,res)=>{
-	console.log('working')
-})
+
+/////////////////////////////ROUTS//////////////////////////////////////////////
+app.get("/", (req, res) => {
+	const usersList = {
+		users: usersData,
+	};
+	res.render("users", usersList);
+});
+app.post("/", (req, res) => {
+	if (req.body.userId && req.body.title && req.body.content) {
+		const post = {
+			id: postsData[postsData.length - 1].id + 1,
+			userId: req.body.userId,
+			title: req.body.title,
+			content: req.body.content,
+		};
+		postsData.push(post);
+		res.json(postsData[postsData.length - 1]);
+	} else {
+		res.json({ error: "Insufficient Data" });
+	}
+});
+
+// app.get("/")
+
+/////////////////////ERRORS////////////////////////////////////////////////////
 app.get("/", (req, res) => {
 	throw new Error("BROKEN"); // Express will catch this on its own.
 });

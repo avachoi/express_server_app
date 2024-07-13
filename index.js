@@ -49,22 +49,42 @@ app.get("/", (req, res) => {
 	};
 	res.render("users", usersList);
 });
-app.post("/", (req, res) => {
-	if (req.body.userId && req.body.title && req.body.content) {
+app.post("/", (req, res) => {});
+
+app.get("/:id", (req, res) => {
+	console.log("id", req.params.id);
+	let user = usersData.find((user) => user.id == req.params.id);
+	console.log("user", user);
+	const usersPosts = {
+		user: user,
+		posts: postsData.filter((post) => post.userId == req.params.id),
+	};
+
+	if (usersPosts) {
+		res.render("posts", usersPosts);
+	}
+});
+app.post("/:id", (req, res) => {
+	if (req.body.title && req.body.content) {
+		let user = usersData.find((user) => user.id === req.params.id);
+
+		const usersPosts = {
+			user: user,
+			posts: postsData.filter((post) => post.userId == req.params.id),
+		};
 		const post = {
 			id: postsData[postsData.length - 1].id + 1,
-			userId: req.body.userId,
+			userId: req.params.id,
 			title: req.body.title,
 			content: req.body.content,
 		};
 		postsData.push(post);
-		res.json(postsData[postsData.length - 1]);
+		console.log("postsData", postsData);
+		res.redirect(`/${req.params.id}`);
 	} else {
 		res.json({ error: "Insufficient Data" });
 	}
 });
-
-// app.get("/")
 
 /////////////////////ERRORS////////////////////////////////////////////////////
 app.get("/", (req, res) => {

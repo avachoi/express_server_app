@@ -38,6 +38,9 @@ app.use(
 		].join(" ");
 	})
 );
+app.get("/",(req,res)=>{
+	console.log('working')
+})
 app.get("/", (req, res) => {
 	throw new Error("BROKEN"); // Express will catch this on its own.
 });

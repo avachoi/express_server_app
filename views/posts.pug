@@ -4,6 +4,13 @@ html
     title Post List
   body
     h1 #{user.username}'s posts
+
+    h2 Filter Posts 
+    form(action=`/${user.id}` method="GET")
+      label(for="filterTitle") Filter by Title: 
+      input(type="text" name="filterTitle" id="filterTitle")
+      button(type="submit") Filter
+
     ul
       each post in posts
         li 

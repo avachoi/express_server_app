@@ -68,10 +68,17 @@ app.post("/", (req, res) => {
 
 app.get("/:id", (req, res) => {
 	let user = usersData.find((user) => user.id == parseInt(req.params.id));
+
 	if (user) {
+		let posts = postsData.filter((post) => post.userId == req.params.id);
+		if (req.query.filterTitle) {
+			posts = posts.filter((post) =>
+				post.title.toLowerCase().includes(req.query.filterTitle.toLowerCase())
+			);
+		}
 		const usersPosts = {
 			user: user,
-			posts: postsData.filter((post) => post.userId == req.params.id),
+			posts: posts,
 		};
 
 		if (usersPosts) {

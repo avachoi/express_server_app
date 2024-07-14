@@ -21,21 +21,3 @@ Method-override: Middleware for Express.js that lets you use HTTP verbs such as 
 HTML and CSS: Used for creating and styling web pages, with CSS used to define the presentation of elements.
 
 Git: Version control system used for tracking changes in the source code during software development.
-
-#Installation
-Clone the repository:
-
-sh
-Copy code
-git clone https://github.com/avachoi/express_server_app.git
-cd express_server_app
-Install the dependencies:
-
-sh
-Copy code
-npm install
-Start the server:
-
-sh
-Copy code
-npm start

@@ -43,9 +43,15 @@ app.use(
 		].join(" ");
 	})
 );
+app.use((req, res, next) => {
+	console.log(`Serving: ${req.url}`);
+	next();
+});
 
 /////////////////////////////ROUTS//////////////////////////////////////////////
 app.get("/", (req, res) => {
+	res.set("Cache-Control", "public, max-age=3600");
+	res.set();
 	const usersList = {
 		users: usersData,
 	};
@@ -142,6 +148,10 @@ app.delete("/:id/:postId", (req, res) => {
 /////////////////////ERRORS////////////////////////////////////////////////////
 app.get("/", (req, res) => {
 	throw new Error("BROKEN"); // Express will catch this on its own.
+});
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).json({ error: "Something went wrong!" });
 });
 app.listen(port, () => {
 	console.log(`Server listening on port:${port}`);

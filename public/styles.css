@@ -1,0 +1,17 @@
+.inline-elements {
+	display: flex;
+	gap: 10px;
+}
+.inline {
+	display: inline-block;
+}
+.title {
+	font-size: 25px;
+	color: palevioletred;
+}
+.body {
+	margin: 50px;
+}
+h1 {
+	text-align: center;
+}

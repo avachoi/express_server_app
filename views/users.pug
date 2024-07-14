@@ -2,14 +2,15 @@ doctype html
 html
   head
     title User List
-  body
+    link(rel="stylesheet" href="/styles.css")
+  body(class="body")
     h1 User List
     ul
       each user in users
         li 
             a(href=`/${user.id}`)
-                p Username: #{user.username}
-                p Email: #{user.email}
+                p(class="inline") Username: #{user.username}
+                p(class="inline") Email: #{user.email}
 
     h2 Add New User
     form(action="/" method="POST")

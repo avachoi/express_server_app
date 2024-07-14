@@ -2,7 +2,8 @@ doctype html
 html
   head
     title Post List
-  body
+    link(rel="stylesheet" href="/styles.css")
+  body(class="body")
     h1 #{user.username}'s posts
 
     h2 Filter Posts 
@@ -14,11 +15,12 @@ html
     ul
       each post in posts
         li 
-            p title: #{post.title}
+            p(class="title") title: #{post.title}
             p content: #{post.content}
-            a(href=`/${user.id}/${post.id}`) edit
-            form(action=`/${user.id}/${post.id}?_method=DELETE` method="POST") 
-              button(type="submit") Delete
+            div.inline-elements
+              a(href=`/${user.id}/${post.id}` class="inline") edit
+              form(action=`/${user.id}/${post.id}?_method=DELETE` method="POST" class="inline") 
+                button(type="submit") Delete
 
     h2 Add New post
     form(action=`/${user.id}` method="POST")

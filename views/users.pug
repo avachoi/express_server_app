@@ -7,12 +7,12 @@ html
     ul
       each user in users
         li 
-            a(href='//google.com')
+            a(href=`/${user.id}`)
                 p Username: #{user.username}
                 p Email: #{user.email}
 
     h2 Add New User
-    form(action="/add-user" method="POST")
+    form(action="/" method="POST")
       label(for="username") Username:
       input(type="text" name="username" id="username" required)
       label(for="email") email:

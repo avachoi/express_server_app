@@ -9,6 +9,9 @@ html
         li 
             p title: #{post.title}
             p content: #{post.content}
+            a(href=`/${user.id}/${post.id}`) edit
+            form(action=`/${user.id}/${post.id}?_method=DELETE` method="POST") 
+              button(type="submit") Delete
 
     h2 Add New post
     form(action=`/${user.id}` method="POST")

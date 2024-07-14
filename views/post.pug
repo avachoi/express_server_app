@@ -1,0 +1,16 @@
+html
+  head
+    title Post List
+  body
+    h1  #{post.title}
+    p #{post.content}
+    
+
+
+    h2 Edit the post
+    form(action=`/${userId}/${post.id}?_method=PUT` method="POST")
+      label(for="title") Title:
+      input(type="text" name="title" id="title" value= post.title required)
+      label(for="content") Content:
+      input(type="textarea" name="content" id="content" value=post.content required)
+      button(type="submit") Edit Post
